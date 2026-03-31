@@ -15,6 +15,10 @@ app.get("/", (req: Request, res: Response): void => {
   res.json(pets);
 });
 
+app.use((req: Request, res: Response): void => {
+  res.status(404).json({ success: false, message: "No route found" });
+});
+
 app.listen(PORT, (): void => {
   console.log(`Server is running on: http://localhost:${PORT}`);
 });
