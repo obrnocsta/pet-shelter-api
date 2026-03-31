@@ -5,6 +5,10 @@ import type { Express } from "express";
 const PORT = process.env.PORT || 8000;
 const app: Express = express();
 
+app.get("/", (req, res) => {
+  res.json({});
+});
+
 app.listen(PORT, (): void => {
   console.log(`Server is running on: http://localhost:${PORT}`);
 });
