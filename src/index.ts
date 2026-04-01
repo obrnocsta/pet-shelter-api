@@ -17,6 +17,12 @@ app.get("/", (req: Request, res: Response<Pet[]>): void => {
   res.json(pets);
 });
 
+app.get("/:id", (req: Request<{ id: string }>, res: Response): void => {
+  const { id } = req.params;
+  const pet = pets.find((pet) => pet.id === parseInt(id));
+  res.json(pet);
+});
+
 app.use(
   (
     req: Request,
