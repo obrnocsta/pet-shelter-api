@@ -14,3 +14,18 @@ export const validateNumericId = (
     next();
   }
 };
+
+export const pleaseAuth = (
+  req: Request<{}, unknown, {}, { password?: string }>,
+  res: Response<{ success: boolean; message: string }>,
+  next: NextFunction,
+) => {
+  const { password } = req.query;
+  if (password === "please") {
+    next();
+  } else {
+    res
+      .status(401)
+      .json({ success: false, message: "Unauthorised. You must say 'please'" });
+  }
+};
