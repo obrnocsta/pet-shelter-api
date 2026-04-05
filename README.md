@@ -1,58 +1,62 @@
 # 🐾 Pet Shelter API
 
-A typed Express.js API built with TypeScript for managing a pet shelter's inventory. Query and retrieve pet information with built-in filtering, custom middleware, and a fully typed request/response system.
+Uma API Express.js tipada, construída com TypeScript para gerenciar o inventário de um abrigo de animais. Consulte e recupere informações de pets com filtragem integrada, middlewares personalizados e um sistema de requisição/resposta totalmente tipado.
 
-## About This Project
+## Sobre Este Projeto
 
-**Pet Shelter API** is a learning project that demonstrates building a RESTful API with Express.js and TypeScript. It provides endpoints to browse available pets for adoption, filtered by species, age, adoption status, and more. The API showcases key backend development concepts including typed routes, custom middleware, controllers, and data management.
+**Pet Shelter API** é um projeto de aprendizado que demonstra a construção de uma API RESTful com Express.js e TypeScript. Ele fornece endpoints para navegar pelos pets disponíveis para adoção, filtrados por espécie, idade, status de adoção e muito mais. A API apresenta conceitos-chave de desenvolvimento backend, incluindo rotas tipadas, middlewares customizados, controllers e gerenciamento de dados.
 
-## Key Features
+## Principais Recursos
 
-- **Fully Typed API**: Built with TypeScript for type safety across routes, controllers, and middleware
-- **Advanced Filtering**: Query pets by species, age range, and adoption status
-- **Custom Middleware**: Request validation (numeric ID checks) and authentication middleware
-- **Router Architecture**: Clean separation of concerns using Express routers and controllers
-- **CORS Support**: Pre-configured for cross-origin requests
-- **Rich Pet Data**: Includes medical records, vaccination history, and adoption tracking
+  - **API Totalmente Tipada**: Construída com TypeScript para segurança de tipos em rotas, controllers e middlewares.
+  - **Filtragem Avançada**: Filtre pets por espécie, faixa etária e status de adoção.
+  - **Middlewares Customizados**: Validação de requisição (verificação de ID numérico) e middleware de autenticação.
+  - **Arquitetura de Roteamento**: Separação clara de responsabilidades usando roteadores e controllers do Express.
+  - **Suporte a CORS**: Pré-configurado para requisições de diferentes origens.
+  - **Dados Ricos dos Pets**: Inclui registros médicos, histórico de vacinação e rastreamento de adoção.
 
-## Getting Started
+## Primeiros Passos
 
-### Prerequisites
+### Pré-requisitos
 
-- Node.js (v18 or higher recommended)
-- npm or your preferred package manager
+  - Node.js (v18 ou superior recomendado)
+  - npm ou seu gerenciador de pacotes preferido
 
-### Installation
+### Instalação
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/obrnocsta/pet-shelter-api.git
-   cd pet-shelter-api
-   ```
+1.  **Clone o repositório**
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+    ```bash
+    git clone https://github.com/obrnocsta/pet-shelter-api.git
+    cd pet-shelter-api
+    ```
 
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
+2.  **Instale as dependências**
 
-   The server will start at `http://localhost:8000`
+    ```bash
+    npm install
+    ```
 
-## Usage
+3.  **Inicie o servidor de desenvolvimento**
 
-### Get All Pets
+    ```bash
+    npm start
+    ```
 
-Retrieve a list of all pets in the shelter:
+    O servidor iniciará em `http://localhost:8000`
+
+## Uso
+
+### Listar Todos os Pets
+
+Recupere uma lista de todos os pets no abrigo:
 
 ```bash
 curl http://localhost:8000/pets
 ```
 
-**Response:**
+**Resposta:**
+
 ```json
 [
   {
@@ -74,39 +78,44 @@ curl http://localhost:8000/pets
 ]
 ```
 
-### Filter Pets by Query Parameters
+### Filtrar Pets por Parâmetros de Consulta (Query Params)
 
-**By Species:**
+**Por Espécie:**
+
 ```bash
 curl "http://localhost:8000/pets?species=Dog"
 ```
 
-**By Adoption Status:**
+**Por Status de Adoção:**
+
 ```bash
 curl "http://localhost:8000/pets?adopted=false"
 ```
 
-**By Age Range:**
+**Por Faixa Etária:**
+
 ```bash
 curl "http://localhost:8000/pets?minAge=2&maxAge=5"
 ```
 
-**Combine Multiple Filters:**
+**Combinar Múltiplos Filtros:**
+
 ```bash
 curl "http://localhost:8000/pets?species=Cat&adopted=false&maxAge=3"
 ```
 
-### Get a Specific Pet
+### Obter um Pet Específico
 
-Retrieve a pet by ID (requires authentication):
+Recupere um pet pelo ID (requer autenticação):
 
 ```bash
 curl "http://localhost:8000/pets/1?password=please"
 ```
 
-**Note:** This endpoint requires a `password` query parameter set to `"please"` and the pet ID must be numeric.
+**Nota:** Este endpoint requer um parâmetro de consulta `password` definido como `"please"` e o ID do pet deve ser numérico.
 
-**Response:**
+**Resposta:**
+
 ```json
 {
   "id": 1,
@@ -119,87 +128,87 @@ curl "http://localhost:8000/pets/1?password=please"
 }
 ```
 
-## Project Structure
+## Estrutura do Projeto
 
 ```
 src/
-├── index.ts                    # Server entry point & Express setup
+├── index.ts                 # Ponto de entrada do servidor e config. do Express
 ├── data/
-│   └── pets.ts                 # Pet data & type definitions
+│   └── pets.ts              # Dados dos pets e definições de tipos
 ├── routes/
-│   └── pets.routes.ts          # Route definitions
+│   └── pets.routes.ts       # Definições de rotas
 ├── controllers/
-│   └── pets.controllers.ts      # Request handlers & business logic
+│   └── pets.controllers.ts   # Manipuladores de requisição e lógica de negócio
 └── middlewares/
-    └── pets.middleware.ts       # Custom middleware (auth, validation)
+    └── pets.middleware.ts    # Middlewares customizados (auth, validação)
 ```
 
-## API Endpoints
+## Endpoints da API
 
-| Method | Endpoint | Query Parameters | Description |
-|--------|----------|------------------|-------------|
-| GET | `/pets` | `species`, `adopted`, `minAge`, `maxAge` | List all pets with optional filters |
-| GET | `/pets/:id` | `password` | Get a specific pet (requires password="please") |
+| Método | Endpoint | Parâmetros de Consulta | Descrição |
+|--------|----------|------------------------|-------------|
+| GET | `/pets` | `species`, `adopted`, `minAge`, `maxAge` | Lista todos os pets com filtros opcionais |
+| GET | `/pets/:id` | `password` | Obtém um pet específico (requer password="please") |
 
-## Query Parameters
+## Parâmetros de Consulta
 
-- **`species`** (string): Filter by pet species (e.g., "Dog", "Cat", "Rabbit")
-- **`adopted`** (boolean): Filter by adoption status ("true" or "false")
-- **`minAge`** (number): Minimum pet age in years
-- **`maxAge`** (number): Maximum pet age in years
+  - **`species`** (string): Filtra pela espécie do pet (ex: "Dog", "Cat", "Rabbit")
+  - **`adopted`** (boolean): Filtra pelo status de adoção ("true" ou "false")
+  - **`minAge`** (number): Idade mínima do pet em anos
+  - **`maxAge`** (number): Idade máxima do pet em anos
 
-## Technology Stack
+## Stack Tecnológica
 
-- **Express.js**: Web framework
-- **TypeScript**: Language for type safety
-- **CORS**: Cross-origin resource sharing
-- **dotenv**: Environment variable management
-- **tsx**: TypeScript executor for development
+  - **Express.js**: Framework web
+  - **TypeScript**: Linguagem para segurança de tipos
+  - **CORS**: Compartilhamento de recursos entre origens
+  - **dotenv**: Gerenciamento de variáveis de ambiente
+  - **tsx**: Executor TypeScript para desenvolvimento
 
-## Environment Variables
+## Variáveis de Ambiente
 
-Create a `.env` file in the root directory to configure:
+Crie um arquivo `.env` no diretório raiz para configurar:
 
 ```env
 PORT=8000
 ```
 
-The API will default to port 8000 if not specified.
+A API usará a porta 8000 por padrão se não for especificada.
 
-## Next Steps & Future Enhancements
+## Próximos Passos e Melhorias Futuras
 
-This project provides a solid foundation for a shelter management system. Consider these improvements:
+Este projeto fornece uma base sólida para um sistema de gerenciamento de abrigos. Considere estas melhorias:
 
-- **Database Integration**: Replace the in-memory pet data with SQLite, MySQL, or PostgreSQL
-- **Async Operations**: Implement async controllers and error handlers for database queries
-- **Frontend Development**: Build a web or mobile frontend to consume this API
-- **Additional Endpoints**: Add POST, PUT, and DELETE operations for pet management
-- **Validation**: Implement request body validation for new pet entries
-- **Error Handling**: Add comprehensive error handling middleware
-- **Testing**: Write unit and integration tests for endpoints
+  - **Integração com Banco de Dados**: Substituir os dados em memória por SQLite, MySQL ou PostgreSQL.
+  - **Operações Assíncronas**: Implementar controllers assíncronos e manipuladores de erro para consultas ao banco.
+  - **Desenvolvimento Frontend**: Construir uma interface web ou mobile para consumir esta API.
+  - **Endpoints Adicionais**: Adicionar operações POST, PUT e DELETE para o gerenciamento de pets.
+  - **Validação**: Implementar validação do corpo da requisição para novas entradas de pets.
+  - **Tratamento de Erros**: Adicionar um middleware abrangente para tratamento de erros.
+  - **Testes**: Escrever testes unitários e de integração para os endpoints.
 
-## Support & Resources
+## Suporte e Recursos
 
-- **Express.js Documentation**: [expressjs.com](https://expressjs.com/)
-- **TypeScript Documentation**: [typescriptlang.org](https://www.typescriptlang.org/)
-- **REST API Best Practices**: See comments in the source code for design decisions
+  - **Documentação do Express.js**: [expressjs.com](https://expressjs.com/)
+  - **Documentação do TypeScript**: [typescriptlang.org](https://www.typescriptlang.org/)
+  - **Melhores Práticas de API REST**: Veja os comentários no código-fonte para entender as decisões de design.
 
-## Contributing
+## Contribuição
 
-Contributions are welcome! To get started:
+Contribuições são bem-vindas\! Para começar:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1.  Faça um Fork do repositório
+2.  Crie uma branch para sua feature (`git checkout -b feature/amazing-feature`)
+3.  Comite suas mudanças (`git commit -m 'Add amazing feature'`)
+4.  Dê um Push na branch (`git push origin feature/amazing-feature`)
+5.  Abra um Pull Request
 
-## License
+## Licença
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](https://www.google.com/search?q=LICENSE) para mais detalhes.
 
----
+-----
 
-**Maintainer**: [@obrnocsta](https://github.com/obrnocsta)
+**Mantenedor**: [@obrnocsta](https://github.com/obrnocsta)
 
-Built as a learning project for Express.js and TypeScript fundamentals.
+Construído como um projeto de aprendizado para os fundamentos de Express.js e TypeScript.
